@@ -21,5 +21,6 @@ import user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('user.urls',namespace='user'))
+    path('user/', include('user.urls',namespace='user')),
+    path('blog/',include('blog.urls',namespace='blog')),
 ]

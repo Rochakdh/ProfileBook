@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from . forms import UserTableDetail
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 
@@ -34,17 +35,24 @@ class ProfileView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'user/profile.html')
 
-class UpdateProfile(View):
-    # template_name = 'user/updateprofile.html'
-    # model = get_user_model()
-    # success_url =reverse_lazy('user:update')
-    def get(self, request, *args, **kwargs):
-        return render(request, 'user/updateprofile.html')
+# class UpdateProfile(View):
+#     # template_name = 'user/updateprofile.html'
+#     # model = get_user_model()
+#     # success_url =reverse_lazy('user:update')
+#     def get(self, request, *args, **kwargs):
+#         print(self.request.user)
+#         user_detail = UserTableDetail(instance=self.request.user)
+#         context ={
+#             'userdetail':user_detail
+#         }
+#         return render(request, 'user/updateprofile.html',context)
 
+class UpdateProfile(UpdateView):
+    template_name = 'user/updateprofile.html'
+    model = get_user_model()
+    success_url = reverse_lazy('user:update',kwargs={'pk':1})
+    form_class = UserTableDetail
 
-
-
-    
 
 
 
