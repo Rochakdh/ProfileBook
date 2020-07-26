@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from . forms import UserTableDetail
 from django.contrib.auth import get_user_model
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 
 
 
@@ -50,9 +50,8 @@ class ProfileView(View):
 class UpdateProfile(UpdateView):
     template_name = 'user/updateprofile.html'
     model = get_user_model()
-    success_url = reverse_lazy('user:update',kwargs={'pk':1})
+    # success_url = reverse_lazy('user:update',kwargs={'pk':1})
     form_class = UserTableDetail
 
-
-
-
+    def get_success_url(self):
+        return reverse('user:update',kwargs={'pk':self.object.pk})
