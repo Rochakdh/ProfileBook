@@ -1,14 +1,14 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from django.views.generic import UpdateView
-from django.contrib.auth import login
+from django.views.generic import UpdateView,RedirectView,ListView,DetailView
+from django.contrib.auth import login,logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from . forms import UserTableDetail
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy,reverse
-
+from blog.models import Blog
 
 
 # Create your views here.
@@ -31,9 +31,18 @@ class LoginView(View):
 #     template_name = 'user/base.html'
 
 @method_decorator(login_required,name='dispatch')
-class ProfileView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'user/profile.html')
+class ProfileView(ListView):
+    template_name = 'user/profile.html'
+    model = Blog
+
+
+class LogoutView(RedirectView):
+    url = '/user/login/'
+
+    def dispatch(self, request, *args, **kwargs):
+        logout(request)
+        return super(LogoutView, self).dispatch(request, *args, **kwargs)
+
 
 # class UpdateProfile(View):
 #     # template_name = 'user/updateprofile.html'

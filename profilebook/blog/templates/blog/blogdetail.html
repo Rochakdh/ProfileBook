@@ -1,0 +1,56 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+<!--Main layout-->
+  <main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+
+      <!-- Heading -->
+      <!-- Heading -->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+          <div class="col-md-12 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!--Card content-->
+            <div class="card-body-detail">
+                <h3><u><center>{{ object.title }}</center></u></h3>
+                <p>
+                <center><img src="{{ object.images.url }}" height="500px" width="100%"></center>
+                </center>
+                </p>
+                <b>Author: {{ object.author }}</b><br>
+                last Created:{{ object.date_created}}<br>
+                Last Updated:{{ object.date_updated }}<br>
+                <hr>
+
+                <p> {{ object.content }}</p>
+
+{#                {{ object_list }}#}
+            </div>
+
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+          </div>
+          <!--/.Card-->
+
+          <!--Card-->
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+  </main>
+      <!--Grid row-->
+      <!--Grid row-->
+      {% endblock %}

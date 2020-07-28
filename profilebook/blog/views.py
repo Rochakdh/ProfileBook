@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from  django.views.generic import ListView,DeleteView,UpdateView
+from  django.views.generic import ListView,DeleteView,UpdateView,DetailView
 from  .models import Blog
 from .forms import  BlogForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from user.views import UpdateProfile
 
 # Create your views here.
@@ -20,12 +20,21 @@ class BlogDelete(DeleteView):
         return Blog.objects.filter(author = self.request.user.id)
 
 class BlogUpdate(UpdateView):
-    success_url ='/blog/view/'
-    form_class = BlogForm
+    model = Blog
     template_name = 'blog/updateblog.html'
+    form_class = BlogForm
+    success_url = '/blog/view/'
 
-    def get_queryset(self):
-        return Blog.objects.filter(author = self.request.user.id)
+    def post(self, request, *args, **kwargs):
+        self.object= BlogForm.save(self)
+        return super().post(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
+
+
+
+class AllBlogDetail(DetailView):
+    template_name = 'blog/blogdetail.html'
+    model = Blog
+
+
+
