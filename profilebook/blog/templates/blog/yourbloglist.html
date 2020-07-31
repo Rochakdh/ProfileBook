@@ -2,35 +2,25 @@
 {% load static %}
 {% block content %}
     <main class="pt-5 mx-lg-5">
-    <div class="container-fluid mt-5">
+    <div class="container-fluid">
 
       <!-- Heading -->
     <!-- Heading -->
-      <div class="card mb-4 wow fadeIn">
-
-        <!--Card content-->
-        <div class="card-body-detail d-sm-flex justify-content-between">
-
-          <h4 class="mb-2 mb-sm-0 pt-1">
-
-          </h4>
-
-          <form class="d-flex justify-content-center">
+    <div class="create-blog mb-4" style="float: right">
+    <form class="d-flex" method="post" action="{% url 'blog:create' %}">
+        {% csrf_token %}
             <!-- Default input -->
 {#            <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">#}
-            <button class="btn btn-primary btn-md my-0 p" type="submit">
-              Create Blog
-            </button>
+          <button class="btn btn-primary btn-md my-0" type="submit">
+            Create New Blogs
+          </button>
+    </form>
+    </div>
 
-          </form>
 
-        </div>
-
-      </div>
-      <!-- Heading -->
+ <br clear="all">
 {% for blog in object_list %}
-      <div class="card mb-4 wow fadeIn">
-
+      <div class="card mb-4 wow ">
         <!--Card content-->
 
         <div class="card-body-detail d-sm-flex justify-content-between">
@@ -38,21 +28,20 @@
                               <b>{{ blog.title }}</b> &nbsp;&nbsp;&nbsp;&nbsp;
                               {{ blog.date_created }}
             <form method="get" action="{% url 'blog:update' blog.pk %}">
-                      <button type="submit">Update</button>
+                <button type="submit" class="btn btn-success m-0 pl-3 pr-3 pt-2 pb-2">Update</button>
                   </form>
 {#            <a href="{% url 'blog:update' blog.pk %}">Update</a>#}
 
             <form method="post" action="{% url 'blog:delete' blog.pk %}">
                       {% csrf_token %}
-                      <button type="submit">Delete</button>
+                <button type="submit" class="btn btn-danger m-0 pl-3 pr-3 pt-2 pb-2">Delete</button>
                   </form>
-
-
             </div>
         </div>
       </div>
     {% endfor %}
-    </div>
+
+        </div>
       <!-- Heading -->
   </main>
 {% endblock %}

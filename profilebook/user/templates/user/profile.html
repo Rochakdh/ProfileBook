@@ -3,7 +3,7 @@
 {% block content %}
 <!--Main layout-->
   <main class="pt-5 mx-lg-5">
-    <div class="container-fluid mt-5">
+    <div class="container-fluid ">
 
       <!-- Heading -->
       <div class="card mb-4 wow fadeIn">
@@ -11,18 +11,25 @@
         <!--Card content-->
         <div class="card-body-detail d-sm-flex justify-content-between">
 
-          <h4 class="mb-2 mb-sm-0 pt-1">
-            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
-            <span>/</span>
-            <span>Dashboard</span>
-          </h4>
-
-          <form class="d-flex justify-content-center">
+         <form class="d-flex" method="post" action="{% url 'blog:create' %}">
+             {% csrf_token %}
             <!-- Default input -->
-            <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
+{#            <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">#}
+                  <button class="btn btn-primary btn-md my-0" type="submit">
+                    Create New Blogs
+                  </button>
+             </form>
+
+
+          </form>
+
+          <form class="d-flex justify-content-center" method="GET" action="{% url 'user:search' %}">
+            <!-- Default input -->
+            <input type="search" placeholder="Search Title" aria-label="Search" class="form-control" name="title">
             <button class="btn btn-primary btn-sm my-0 p" type="submit">
               <i class="fas fa-search"></i>
             </button>
+              </form>
 
           </form>
 
@@ -56,13 +63,23 @@
 {#                {{ object_list }}#}
             </div>
               <br>
-              <form method="get" action="{% url 'blog:blog-detail' blog.id %}">
+
                   {% if blog.author == user %}
-                  <center><button type="submit">View More</button>&nbsp;&nbsp;
-                      <button type="submit"><a href="{% url 'blog:update' blog.id %}">Edit</a></button></center>
+
+                     <center>
+                      <form class="ml-4" method="get" action="{% url 'blog:blog-detail' blog.id %}" style="float: left;">
+                     <button type="submit" class="btn btn-primary m-0 pl-3 pr-3 pt-2 pb-2">View More</button>
+                      </form>
+                      <form action="{% url 'blog:update' blog.id %}" method="get">
+                          <button type="submit" class="btn btn-success m-0 pl-3 pr-3 pt-2 pb-2">Update</button>
+                      </form>
+                      </center>
                       {% else %}
-                      <center><button type="submit">View More</button>&nbsp;&nbsp;
-                      <br>
+                      <center>
+                     <form method="get" action="{% url 'blog:blog-detail' blog.id %}">
+                     <button type="submit" class="btn btn-primary m-0 pl-3 pr-3 pt-2 pb-2">View More</button>
+                      </form>
+                      </center>
                   {% endif %}
                   <br>
               </form>

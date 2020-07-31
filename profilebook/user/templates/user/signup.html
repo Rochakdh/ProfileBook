@@ -18,17 +18,21 @@
       <img src="{% static 'image/user.jpg' %}" id="icon">
     </div>
 
-    <!-- Login Form -->
+    <!-- SignuUP Form -->
     <form method="POST">
         {% csrf_token %}
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+      <input type="text" id="username" class="fadeIn second" name="username" placeholder="username" required>
+      <input type="text" id="username" class="fadeIn second" name="first_name" placeholder="first name" required>
+      <input type="text" id="username" class="fadeIn second" name="last_name" placeholder="last name" required>
+      <input type="text" id="email" class="fadeIn second" name="email" placeholder="email" required>
       <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+      <input type="password" id="password-check" class="fadeIn third" name="confirm_password" placeholder="confirm password">
+      <input type="submit" class="fadeIn fourth" value="Sign Up">
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="{% url 'user:signup' %}">Sign Up</a>
+      <a class="underlineHover" href="{% url 'user:login' %}">Login</a>
     </div>
 
   </div>

@@ -18,10 +18,16 @@ from django.urls import path
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
+from django.urls import reverse_lazy
+
+from django.shortcuts import redirect
+from user import views
 
 import user
 
 urlpatterns = [
+    path('', RedirectView.as_view(url=reverse_lazy('user:login'))),
     path('admin/', admin.site.urls),
     path('user/', include('user.urls',namespace='user')),
     path('blog/',include('blog.urls',namespace='blog')),
