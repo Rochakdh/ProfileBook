@@ -45,3 +45,6 @@ class BlogUpdate(UpdateView):
 class AllBlogDetail(DetailView):
     template_name = 'blog/blogdetail.html'
     model = Blog
+
+
+#blog check to create git branch
